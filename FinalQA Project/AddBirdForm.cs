@@ -23,12 +23,43 @@ namespace FinalQA_Project
         }
 
 
+
+        //
+        // Species Combo Box mapping
+        //
+        // Define a dictionary to store the mapping between species and subspecies
+        Dictionary<string, List<string>> subspeciesMapping = new Dictionary<string, List<string>>() {
+            { "American Gouldian", new List<string> { "North America", "Central America", "South America" } },
+            { "European Gouldian", new List<string> { "Eastern Europe", "Western Europe" } },
+            { "Australian Gouldian", new List<string> { "Central Australia", "Coastal cities" } }
+        };
+        
+        // Event handler for the "Species" ComboBox selection
+        private void SpeciesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Clear the items in the "Subspecies" ComboBox
+            SubspeciesComboBox.Items.Clear();
+
+            // Get the selected species from the "Species" ComboBox
+            string selectedSpecies = SpeciesComboBox.SelectedItem.ToString();
+
+            // Check if the selected species exists in the mapping dictionary
+            if (subspeciesMapping.ContainsKey(selectedSpecies))
+            {
+                // Populate the "Subspecies" ComboBox with the corresponding subspecies
+                List<string> subspecies = subspeciesMapping[selectedSpecies];
+                SubspeciesComboBox.Items.AddRange(subspecies.ToArray());
+            }
+        }
+
+
+
         private void AddBirdButton_Click(object sender, EventArgs e)
         {
             // Capture the data entered by the user
             string serialNumber = SerialNumberTextBox.Text;
-            string species = SpeciesTextBox.Text;
-            string subspecies = SubspeciesTextBox.Text;
+            string species = SpeciesComboBox.Text;
+            string subspecies = SubspeciesComboBox.Text;
             DateTime hatchingDate = HatchingDateTimePicker.Value;
             string gender = GenderComboBox.Text;
             string cageSerialNumber = CageSerialNumberTextBox.Text;
@@ -352,7 +383,7 @@ namespace FinalQA_Project
             return hasLetter && hasNumber;  
         }
 
-
+        
     }
 
 }
