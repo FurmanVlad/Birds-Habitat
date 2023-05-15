@@ -30,8 +30,6 @@
         {
             this.AddBirdButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SerialNumberTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.SpeciesTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.SubspeciesTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.CageSerialNumberTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.FatherSerialNumberTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.MotherSerialNumberTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -51,6 +49,8 @@
             this.HeadColorAddBirdLabel = new System.Windows.Forms.Label();
             this.BreastColorAddBirdLabel = new System.Windows.Forms.Label();
             this.BodyColorAddBirdLabel = new System.Windows.Forms.Label();
+            this.SpeciesComboBox = new System.Windows.Forms.ComboBox();
+            this.SubspeciesComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // AddBirdButton
@@ -87,42 +87,6 @@
             this.SerialNumberTextBox.TabIndex = 3;
             this.SerialNumberTextBox.TabStop = false;
             this.SerialNumberTextBox.UseSystemPasswordChar = false;
-            // 
-            // SpeciesTextBox
-            // 
-            this.SpeciesTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.SpeciesTextBox.Depth = 0;
-            this.SpeciesTextBox.Hint = "";
-            this.SpeciesTextBox.Location = new System.Drawing.Point(78, 179);
-            this.SpeciesTextBox.MaxLength = 32767;
-            this.SpeciesTextBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.SpeciesTextBox.Name = "SpeciesTextBox";
-            this.SpeciesTextBox.PasswordChar = '\0';
-            this.SpeciesTextBox.SelectedText = "";
-            this.SpeciesTextBox.SelectionLength = 0;
-            this.SpeciesTextBox.SelectionStart = 0;
-            this.SpeciesTextBox.Size = new System.Drawing.Size(259, 28);
-            this.SpeciesTextBox.TabIndex = 4;
-            this.SpeciesTextBox.TabStop = false;
-            this.SpeciesTextBox.UseSystemPasswordChar = false;
-            // 
-            // SubspeciesTextBox
-            // 
-            this.SubspeciesTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.SubspeciesTextBox.Depth = 0;
-            this.SubspeciesTextBox.Hint = "";
-            this.SubspeciesTextBox.Location = new System.Drawing.Point(78, 243);
-            this.SubspeciesTextBox.MaxLength = 32767;
-            this.SubspeciesTextBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.SubspeciesTextBox.Name = "SubspeciesTextBox";
-            this.SubspeciesTextBox.PasswordChar = '\0';
-            this.SubspeciesTextBox.SelectedText = "";
-            this.SubspeciesTextBox.SelectionLength = 0;
-            this.SubspeciesTextBox.SelectionStart = 0;
-            this.SubspeciesTextBox.Size = new System.Drawing.Size(259, 28);
-            this.SubspeciesTextBox.TabIndex = 5;
-            this.SubspeciesTextBox.TabStop = false;
-            this.SubspeciesTextBox.UseSystemPasswordChar = false;
             // 
             // CageSerialNumberTextBox
             // 
@@ -362,11 +326,36 @@
             this.BodyColorAddBirdLabel.TabIndex = 26;
             this.BodyColorAddBirdLabel.Text = "Body Color:";
             // 
+            // SpeciesComboBox
+            // 
+            this.SpeciesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SpeciesComboBox.FormattingEnabled = true;
+            this.SpeciesComboBox.Items.AddRange(new object[] {
+            "American Gouldian",
+            "European Gouldian",
+            "Australian Gouldian"});
+            this.SpeciesComboBox.Location = new System.Drawing.Point(81, 183);
+            this.SpeciesComboBox.Name = "SpeciesComboBox";
+            this.SpeciesComboBox.Size = new System.Drawing.Size(183, 24);
+            this.SpeciesComboBox.TabIndex = 27;
+            this.SpeciesComboBox.SelectedIndexChanged += new System.EventHandler(this.SpeciesComboBox_SelectedIndexChanged);
+            // 
+            // SubspeciesComboBox
+            // 
+            this.SubspeciesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SubspeciesComboBox.FormattingEnabled = true;
+            this.SubspeciesComboBox.Location = new System.Drawing.Point(81, 244);
+            this.SubspeciesComboBox.Name = "SubspeciesComboBox";
+            this.SubspeciesComboBox.Size = new System.Drawing.Size(183, 24);
+            this.SubspeciesComboBox.TabIndex = 28;
+            // 
             // AddBirdForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 484);
+            this.Controls.Add(this.SubspeciesComboBox);
+            this.Controls.Add(this.SpeciesComboBox);
             this.Controls.Add(this.BodyColorAddBirdLabel);
             this.Controls.Add(this.BreastColorAddBirdLabel);
             this.Controls.Add(this.HeadColorAddBirdLabel);
@@ -386,8 +375,6 @@
             this.Controls.Add(this.MotherSerialNumberTextBox);
             this.Controls.Add(this.FatherSerialNumberTextBox);
             this.Controls.Add(this.CageSerialNumberTextBox);
-            this.Controls.Add(this.SubspeciesTextBox);
-            this.Controls.Add(this.SpeciesTextBox);
             this.Controls.Add(this.SerialNumberTextBox);
             this.Controls.Add(this.AddBirdButton);
             this.Name = "AddBirdForm";
@@ -401,8 +388,6 @@
 
         private MaterialSkin.Controls.MaterialRaisedButton AddBirdButton;
         private MaterialSkin.Controls.MaterialSingleLineTextField SerialNumberTextBox;
-        private MaterialSkin.Controls.MaterialSingleLineTextField SpeciesTextBox;
-        private MaterialSkin.Controls.MaterialSingleLineTextField SubspeciesTextBox;
         private MaterialSkin.Controls.MaterialSingleLineTextField CageSerialNumberTextBox;
         private MaterialSkin.Controls.MaterialSingleLineTextField FatherSerialNumberTextBox;
         private MaterialSkin.Controls.MaterialSingleLineTextField MotherSerialNumberTextBox;
@@ -422,5 +407,7 @@
         private System.Windows.Forms.Label HeadColorAddBirdLabel;
         private System.Windows.Forms.Label BreastColorAddBirdLabel;
         private System.Windows.Forms.Label BodyColorAddBirdLabel;
+        private System.Windows.Forms.ComboBox SpeciesComboBox;
+        private System.Windows.Forms.ComboBox SubspeciesComboBox;
     }
 }
