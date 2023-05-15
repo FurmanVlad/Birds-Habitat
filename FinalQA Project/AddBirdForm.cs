@@ -48,45 +48,54 @@ namespace FinalQA_Project
                 // Create a new Excel Application object
                 Application excelApp = new Application();
 
-                // Open the Excel workbook containing the login information
-                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
+                // Open the Excel workbook containing the habitat information
+                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\Source\Repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
 
-                // Get the Worksheet object for the sheet containing the login information
-                Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
+                // Get the Worksheet object for the sheet containing the habitat information
+                Worksheet worksheetBird = (Worksheet)workbook.Worksheets["Birds"];
+                Worksheet worksheetCage = (Worksheet)workbook.Worksheets["Cages"];
+
 
 
                 // Check if the serial number already exists in the worksheet
-                Range serialNumberRange = worksheet.Range["A:A"].Find(serialNumber, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
+                Range serialNumberRange = worksheetBird.Range["A:A"].Find(serialNumber, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
+                Range cageSerialNumberRange = worksheetCage.Range["A:A"].Find(cageSerialNumber, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
+
                 if (serialNumberRange != null)
                 {
                     MessageBox.Show("Error!\nSerial number already exists.", "Duplicate serial number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
+                    return;
+                }
+
+                // Check if the cage serial number exists in the worksheet
+                if (cageSerialNumberRange == null)
+                {
+                    MessageBox.Show("Error!\nCage serial number not exists.", "Invalid cage serial number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
                     return;
                 }
 
                 // Add the new bird to the worksheet
-                int lastRow = worksheet.UsedRange.Rows.Count + 1;
+                int lastRow = worksheetBird.UsedRange.Rows.Count + 1;
 
-                worksheet.Cells[lastRow, 1] = serialNumber;
-                worksheet.Cells[lastRow, 2] = species;
-                worksheet.Cells[lastRow, 3] = subspecies;
-                worksheet.Cells[lastRow, 4] = hatchingDate;
-                worksheet.Cells[lastRow, 5] = gender;
-                worksheet.Cells[lastRow, 6] = cageSerialNumber;
-                worksheet.Cells[lastRow, 7] = fatherSerialNumber;
-                worksheet.Cells[lastRow, 8] = motherSerialNumber;
-                worksheet.Cells[lastRow, 9] = headColor;
-                worksheet.Cells[lastRow, 10] = breastColor;
-                worksheet.Cells[lastRow, 11] = bodyColor;
+                worksheetBird.Cells[lastRow, 1] = serialNumber;
+                worksheetBird.Cells[lastRow, 2] = species;
+                worksheetBird.Cells[lastRow, 3] = subspecies;
+                worksheetBird.Cells[lastRow, 4] = hatchingDate;
+                worksheetBird.Cells[lastRow, 5] = gender;
+                worksheetBird.Cells[lastRow, 6] = cageSerialNumber;
+                worksheetBird.Cells[lastRow, 7] = fatherSerialNumber;
+                worksheetBird.Cells[lastRow, 8] = motherSerialNumber;
+                worksheetBird.Cells[lastRow, 9] = headColor;
+                worksheetBird.Cells[lastRow, 10] = breastColor;
+                worksheetBird.Cells[lastRow, 11] = bodyColor;
+
 
 
                 // Close the workbook and the Excel application
-                workbook.Save();
-                workbook.Close();
-                excelApp.Quit();
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
-
+                ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
+ 
 
                 MessageBox.Show("New bird added.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
@@ -97,6 +106,18 @@ namespace FinalQA_Project
             }
         }
 
+
+        // Close the workbook and the Excel application
+        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheetBird, Worksheet worksheetCage) {
+            workbook.Save();
+            workbook.Close();
+            excelApp.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheetBird);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheetCage);
+
+        }
         private bool ValidateInput(string serialNumber, string species, string subspecies, DateTime hatchingDate, string gender, string cageSerialNumber, string fatherSerialNumber, string motherSerialNumber, string headColor, string breastColor, string bodyColor)
         {
 
@@ -177,13 +198,13 @@ namespace FinalQA_Project
             /////////////////// cageSerialNumber ///////////////////
             if (string.IsNullOrEmpty(cageSerialNumber))
             {
-                MessageBox.Show("Please enter cageSerialNumber.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter cage serial number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            // Check if the species is a valid string (only letters)
+            // Check if the cageSerialNumber is a valid string (letters and numbers)
             if (!IsAlphabeticAndNumeric(cageSerialNumber))
             {
-                MessageBox.Show("Please enter valid cageSerialNumber.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid cage serial number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -223,6 +244,19 @@ namespace FinalQA_Project
             }
 
 
+            // Check if the mothers or fathers serial number different from the bird itself
+            if (motherSerialNumber == serialNumber || serialNumber  == fatherSerialNumber)
+            {
+                MessageBox.Show("Parent's serial numbers cannot be the same the as the bird you want to add.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Check if the mothers and the fathers serial number not the same
+            if (motherSerialNumber == fatherSerialNumber)
+            {
+                MessageBox.Show("Parents' serial numbers cannot be the same.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
 
             /////////////////// headColor ///////////////////
@@ -291,7 +325,7 @@ namespace FinalQA_Project
 
 
         // Returns true if the input string contains only alphabetical characters and numeric characters
-        public bool IsAlphabeticAndNumeric(string s)
+        public static bool IsAlphabeticAndNumeric(string s)
         {
             if (s == null || s.Length < 1) return false;
 
@@ -315,18 +349,7 @@ namespace FinalQA_Project
                 }
             }
 
-            return hasLetter && hasNumber;
-
-
-            //if (s == null || s.Length < 1) return false;
-            //foreach (char c in s)
-            //{
-            //    if (((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')))
-            //    {
-            //        return false;
-            //    }
-            //}
-            //return true;
+            return hasLetter && hasNumber;  
         }
 
 

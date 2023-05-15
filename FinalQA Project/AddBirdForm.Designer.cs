@@ -234,6 +234,7 @@
             // 
             // HatchingDateTimePicker
             // 
+            this.HatchingDateTimePicker.CustomFormat = "";
             this.HatchingDateTimePicker.Location = new System.Drawing.Point(78, 301);
             this.HatchingDateTimePicker.Name = "HatchingDateTimePicker";
             this.HatchingDateTimePicker.Size = new System.Drawing.Size(259, 22);
@@ -241,6 +242,7 @@
             // 
             // GenderComboBox
             // 
+            this.GenderComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GenderComboBox.FormattingEnabled = true;
             this.GenderComboBox.Items.AddRange(new object[] {
             "Male",

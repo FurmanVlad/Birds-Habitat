@@ -53,7 +53,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -73,6 +75,12 @@
     </Compile>
     <Compile Include="AddBirdForm.Designer.cs">
       <DependentUpon>AddBirdForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddCageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCageForm.Designer.cs">
+      <DependentUpon>AddCageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -96,6 +104,9 @@
     </Compile>
     <EmbeddedResource Include="AddBirdForm.resx">
       <DependentUpon>AddBirdForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCageForm.resx">
+      <DependentUpon>AddCageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

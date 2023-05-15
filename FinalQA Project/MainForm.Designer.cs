@@ -59,6 +59,7 @@
             this.AddCageImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.AddCageImg.TabIndex = 2;
             this.AddCageImg.TabStop = false;
+            this.AddCageImg.Click += new System.EventHandler(this.AddCageImg_Click);
             // 
             // SearchCageImg
             // 

@@ -42,6 +42,12 @@ namespace FinalQA_Project
         {
             AddBirdForm addBirdForm = new AddBirdForm();
             addBirdForm.Show();
-        }    
+        }
+
+        private void AddCageImg_Click(object sender, EventArgs e)
+        {
+            AddCageForm addCageForm = new AddCageForm();
+            addCageForm.Show();
+        }
     }
 }
