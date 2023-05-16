@@ -71,7 +71,7 @@ namespace FinalQA_Project
 
 
             // Validate the input data
-            bool inputValid = ValidateInput(serialNumber, species, subspecies, hatchingDate, gender, cageSerialNumber, fatherSerialNumber, motherSerialNumber, headColor, breastColor, bodyColor);
+            bool inputValid = ValidateInput(serialNumber, species, subspecies, gender, cageSerialNumber, fatherSerialNumber, motherSerialNumber, headColor, breastColor, bodyColor);
             if (!inputValid) { return; }
 
             try
@@ -80,7 +80,7 @@ namespace FinalQA_Project
                 Application excelApp = new Application();
 
                 // Open the Excel workbook containing the habitat information
-                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\Source\Repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
+                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
 
                 // Get the Worksheet object for the sheet containing the habitat information
                 Worksheet worksheetBird = (Worksheet)workbook.Worksheets["Birds"];
@@ -149,7 +149,7 @@ namespace FinalQA_Project
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheetCage);
 
         }
-        private bool ValidateInput(string serialNumber, string species, string subspecies, DateTime hatchingDate, string gender, string cageSerialNumber, string fatherSerialNumber, string motherSerialNumber, string headColor, string breastColor, string bodyColor)
+        private bool ValidateInput(string serialNumber, string species, string subspecies, string gender, string cageSerialNumber, string fatherSerialNumber, string motherSerialNumber, string headColor, string breastColor, string bodyColor)
         {
 
             /////////////////// serialNumber ///////////////////
@@ -176,12 +176,7 @@ namespace FinalQA_Project
                 return false;
             }
 
-            // Check if the species is a valid string (only letters)
-            if (!IsAlphabetic(species))
-            {
-                MessageBox.Show("Please enter valid species.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            
 
 
 
@@ -193,12 +188,7 @@ namespace FinalQA_Project
                 return false;
             }
 
-            // Check if the species is a valid string (only letters)
-            if (!IsAlphabetic(subspecies))
-            {
-                MessageBox.Show("Please enter valid subspecies.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            
 
 
 
@@ -216,12 +206,7 @@ namespace FinalQA_Project
                 return false;
             }
 
-            // Check if the gender is a valid input
-            if (gender != "Male" && gender != "Female")
-            {
-                MessageBox.Show("Please enter valid gender.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            
 
 
 

@@ -71,7 +71,7 @@ namespace FinalQA_Project
             Application excelApp = new Application();
 
             // Open the Excel workbook containing the user information
-            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\Source\Repos\FinalQA Project\FinalQA Project\Users.xlsx");
+            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Users.xlsx");
 
             // Get the Worksheet object for the sheet containing the user information
             Worksheet worksheet = (Worksheet)workbook.Worksheets["Main"];

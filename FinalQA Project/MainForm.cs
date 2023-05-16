@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
@@ -28,7 +21,7 @@ namespace FinalQA_Project
                 e.Cancel = true;
                 DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
-                {       
+                {
                     // close any open files or connections, etc.
                     // ...
 
@@ -49,5 +42,13 @@ namespace FinalQA_Project
             AddCageForm addCageForm = new AddCageForm();
             addCageForm.Show();
         }
+
+        private void SearchBirdImg_Click(object sender, EventArgs e)
+        {
+            SearchBirdForm searchBirdForm = new SearchBirdForm();
+            searchBirdForm.Show();
+        }
+
+       
     }
 }
