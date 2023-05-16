@@ -55,6 +55,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,6 +74,12 @@
     </Compile>
     <Compile Include="AddBirdForm.Designer.cs">
       <DependentUpon>AddBirdForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CageSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CageSearch.Designer.cs">
+      <DependentUpon>CageSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -96,6 +103,9 @@
     </Compile>
     <EmbeddedResource Include="AddBirdForm.resx">
       <DependentUpon>AddBirdForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CageSearch.resx">
+      <DependentUpon>CageSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

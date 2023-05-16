@@ -42,6 +42,12 @@ namespace FinalQA_Project
         {
             AddBirdForm addBirdForm = new AddBirdForm();
             addBirdForm.Show();
-        }    
+        }
+
+        private void SearchCageImg_Click(object sender, EventArgs e)
+        {
+            CageSearch cageSearch = new CageSearch();
+            cageSearch.Show();
+        }
     }
 }

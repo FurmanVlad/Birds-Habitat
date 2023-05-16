@@ -70,6 +70,7 @@
             this.SearchCageImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.SearchCageImg.TabIndex = 1;
             this.SearchCageImg.TabStop = false;
+            this.SearchCageImg.Click += new System.EventHandler(this.SearchCageImg_Click);
             // 
             // AddBirdImg
             // 
