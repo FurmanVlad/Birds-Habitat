@@ -12,6 +12,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace FinalQA_Project
 {
@@ -43,7 +44,7 @@ namespace FinalQA_Project
                 Application excelApp = new Application();
 
                 // Open the Excel workbook containing the login information
-                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
+                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
 
                 // Get the Worksheet object for the sheet containing the login information
                 Worksheet worksheet = (Worksheet)workbook.Worksheets["Cages"];
@@ -134,6 +135,24 @@ namespace FinalQA_Project
 
 
             return true;
+        }
+        private void YourForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CloseExcelProcesses();
+        }
+
+        private void CloseExcelProcesses()
+        {
+            MessageBox.Show("Are you sure you want to exit?");
+            // Get all running Excel processes
+            Process[] processes = Process.GetProcessesByName("EXCEL");
+
+            // Close each Excel process
+            foreach (Process process in processes)
+            {
+                process.CloseMainWindow();
+                process.Close();
+            }
         }
     }
 }

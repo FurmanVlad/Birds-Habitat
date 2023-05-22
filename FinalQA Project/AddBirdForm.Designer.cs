@@ -33,9 +33,6 @@
             this.CageSerialNumberTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.FatherSerialNumberTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.MotherSerialNumberTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.HeadColorTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.BreastColorTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.BodyColorTextBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.HatchingDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.GenderComboBox = new System.Windows.Forms.ComboBox();
             this.SerialNumberAddBirdLabel = new System.Windows.Forms.Label();
@@ -52,6 +49,9 @@
             this.SpeciesComboBox = new System.Windows.Forms.ComboBox();
             this.SubspeciesComboBox = new System.Windows.Forms.ComboBox();
             this.AddBirdFormPanel = new System.Windows.Forms.Panel();
+            this.BodyColorComboBox = new System.Windows.Forms.ComboBox();
+            this.BreastColorComboBox = new System.Windows.Forms.ComboBox();
+            this.HeadColorComboBox = new System.Windows.Forms.ComboBox();
             this.AddBirdFormPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,63 +149,6 @@
             this.MotherSerialNumberTextBox.TabStop = false;
             this.MotherSerialNumberTextBox.UseSystemPasswordChar = false;
             // 
-            // HeadColorTextBox
-            // 
-            this.HeadColorTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.HeadColorTextBox.Depth = 0;
-            this.HeadColorTextBox.Hint = "";
-            this.HeadColorTextBox.Location = new System.Drawing.Point(467, 174);
-            this.HeadColorTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.HeadColorTextBox.MaxLength = 32767;
-            this.HeadColorTextBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.HeadColorTextBox.Name = "HeadColorTextBox";
-            this.HeadColorTextBox.PasswordChar = '\0';
-            this.HeadColorTextBox.SelectedText = "";
-            this.HeadColorTextBox.SelectionLength = 0;
-            this.HeadColorTextBox.SelectionStart = 0;
-            this.HeadColorTextBox.Size = new System.Drawing.Size(259, 28);
-            this.HeadColorTextBox.TabIndex = 10;
-            this.HeadColorTextBox.TabStop = false;
-            this.HeadColorTextBox.UseSystemPasswordChar = false;
-            // 
-            // BreastColorTextBox
-            // 
-            this.BreastColorTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.BreastColorTextBox.Depth = 0;
-            this.BreastColorTextBox.Hint = "";
-            this.BreastColorTextBox.Location = new System.Drawing.Point(467, 235);
-            this.BreastColorTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BreastColorTextBox.MaxLength = 32767;
-            this.BreastColorTextBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BreastColorTextBox.Name = "BreastColorTextBox";
-            this.BreastColorTextBox.PasswordChar = '\0';
-            this.BreastColorTextBox.SelectedText = "";
-            this.BreastColorTextBox.SelectionLength = 0;
-            this.BreastColorTextBox.SelectionStart = 0;
-            this.BreastColorTextBox.Size = new System.Drawing.Size(259, 28);
-            this.BreastColorTextBox.TabIndex = 11;
-            this.BreastColorTextBox.TabStop = false;
-            this.BreastColorTextBox.UseSystemPasswordChar = false;
-            // 
-            // BodyColorTextBox
-            // 
-            this.BodyColorTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.BodyColorTextBox.Depth = 0;
-            this.BodyColorTextBox.Hint = "";
-            this.BodyColorTextBox.Location = new System.Drawing.Point(467, 284);
-            this.BodyColorTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BodyColorTextBox.MaxLength = 32767;
-            this.BodyColorTextBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BodyColorTextBox.Name = "BodyColorTextBox";
-            this.BodyColorTextBox.PasswordChar = '\0';
-            this.BodyColorTextBox.SelectedText = "";
-            this.BodyColorTextBox.SelectionLength = 0;
-            this.BodyColorTextBox.SelectionStart = 0;
-            this.BodyColorTextBox.Size = new System.Drawing.Size(259, 28);
-            this.BodyColorTextBox.TabIndex = 12;
-            this.BodyColorTextBox.TabStop = false;
-            this.BodyColorTextBox.UseSystemPasswordChar = false;
-            // 
             // HatchingDateTimePicker
             // 
             this.HatchingDateTimePicker.CustomFormat = "";
@@ -229,6 +172,7 @@
             this.GenderComboBox.Name = "GenderComboBox";
             this.GenderComboBox.Size = new System.Drawing.Size(121, 24);
             this.GenderComboBox.TabIndex = 15;
+            this.GenderComboBox.SelectedIndexChanged += new System.EventHandler(this.BodyColorComboBox_SelectedIndexChanged);
             // 
             // SerialNumberAddBirdLabel
             // 
@@ -368,6 +312,9 @@
             // AddBirdFormPanel
             // 
             this.AddBirdFormPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.AddBirdFormPanel.Controls.Add(this.BodyColorComboBox);
+            this.AddBirdFormPanel.Controls.Add(this.BreastColorComboBox);
+            this.AddBirdFormPanel.Controls.Add(this.HeadColorComboBox);
             this.AddBirdFormPanel.Controls.Add(this.SerialNumberAddBirdLabel);
             this.AddBirdFormPanel.Controls.Add(this.SubspeciesComboBox);
             this.AddBirdFormPanel.Controls.Add(this.AddBirdButton);
@@ -380,11 +327,8 @@
             this.AddBirdFormPanel.Controls.Add(this.HeadColorAddBirdLabel);
             this.AddBirdFormPanel.Controls.Add(this.MotherSerialNumberTextBox);
             this.AddBirdFormPanel.Controls.Add(this.MotherSerialNumberAddBirdLabel);
-            this.AddBirdFormPanel.Controls.Add(this.HeadColorTextBox);
             this.AddBirdFormPanel.Controls.Add(this.FatherSerialNumberAddBirdLabel);
-            this.AddBirdFormPanel.Controls.Add(this.BreastColorTextBox);
             this.AddBirdFormPanel.Controls.Add(this.CageSerialNumberAddBirdLabel);
-            this.AddBirdFormPanel.Controls.Add(this.BodyColorTextBox);
             this.AddBirdFormPanel.Controls.Add(this.GenderAddBirdLabel);
             this.AddBirdFormPanel.Controls.Add(this.HatchingDateTimePicker);
             this.AddBirdFormPanel.Controls.Add(this.HatchingDateAddBirdLabel);
@@ -392,13 +336,52 @@
             this.AddBirdFormPanel.Controls.Add(this.SubspeciesAddBirdLabel);
             this.AddBirdFormPanel.Controls.Add(this.SpeciesAddBirdLabel);
             this.AddBirdFormPanel.Location = new System.Drawing.Point(16, 87);
-            this.AddBirdFormPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AddBirdFormPanel.Margin = new System.Windows.Forms.Padding(4);
             this.AddBirdFormPanel.Name = "AddBirdFormPanel";
             this.AddBirdFormPanel.Size = new System.Drawing.Size(924, 567);
             this.AddBirdFormPanel.TabIndex = 29;
             // 
+            // BodyColorComboBox
+            // 
+            this.BodyColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.BodyColorComboBox.FormattingEnabled = true;
+            this.BodyColorComboBox.Location = new System.Drawing.Point(467, 296);
+            this.BodyColorComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BodyColorComboBox.Name = "BodyColorComboBox";
+            this.BodyColorComboBox.Size = new System.Drawing.Size(198, 24);
+            this.BodyColorComboBox.TabIndex = 31;
+            // 
+            // BreastColorComboBox
+            // 
+            this.BreastColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.BreastColorComboBox.FormattingEnabled = true;
+            this.BreastColorComboBox.Items.AddRange(new object[] {
+            "White",
+            "Lilac",
+            "Purple"});
+            this.BreastColorComboBox.Location = new System.Drawing.Point(467, 237);
+            this.BreastColorComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BreastColorComboBox.Name = "BreastColorComboBox";
+            this.BreastColorComboBox.Size = new System.Drawing.Size(198, 24);
+            this.BreastColorComboBox.TabIndex = 30;
+            // 
+            // HeadColorComboBox
+            // 
+            this.HeadColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HeadColorComboBox.FormattingEnabled = true;
+            this.HeadColorComboBox.Items.AddRange(new object[] {
+            "Red",
+            "Black",
+            "Yellow"});
+            this.HeadColorComboBox.Location = new System.Drawing.Point(467, 177);
+            this.HeadColorComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.HeadColorComboBox.Name = "HeadColorComboBox";
+            this.HeadColorComboBox.Size = new System.Drawing.Size(198, 24);
+            this.HeadColorComboBox.TabIndex = 29;
+            // 
             // AddBirdForm
             // 
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.YourForm_FormClosing);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1125, 756);
@@ -423,9 +406,6 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField CageSerialNumberTextBox;
         private MaterialSkin.Controls.MaterialSingleLineTextField FatherSerialNumberTextBox;
         private MaterialSkin.Controls.MaterialSingleLineTextField MotherSerialNumberTextBox;
-        private MaterialSkin.Controls.MaterialSingleLineTextField HeadColorTextBox;
-        private MaterialSkin.Controls.MaterialSingleLineTextField BreastColorTextBox;
-        private MaterialSkin.Controls.MaterialSingleLineTextField BodyColorTextBox;
         private System.Windows.Forms.DateTimePicker HatchingDateTimePicker;
         private System.Windows.Forms.ComboBox GenderComboBox;
         private System.Windows.Forms.Label SerialNumberAddBirdLabel;
@@ -442,5 +422,8 @@
         private System.Windows.Forms.ComboBox SpeciesComboBox;
         private System.Windows.Forms.ComboBox SubspeciesComboBox;
         private System.Windows.Forms.Panel AddBirdFormPanel;
+        private System.Windows.Forms.ComboBox HeadColorComboBox;
+        private System.Windows.Forms.ComboBox BreastColorComboBox;
+        private System.Windows.Forms.ComboBox BodyColorComboBox;
     }
 }

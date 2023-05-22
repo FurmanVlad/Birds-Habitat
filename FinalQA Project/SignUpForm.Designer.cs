@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.SignUpPanel = new System.Windows.Forms.Panel();
+            this.togglePictureBox = new System.Windows.Forms.PictureBox();
             this.signUpButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.usernameBoxSignUp = new System.Windows.Forms.TextBox();
             this.idSignUpLabel = new System.Windows.Forms.Label();
@@ -35,9 +37,39 @@
             this.passwordSignUpLabel = new System.Windows.Forms.Label();
             this.idBoxSignUp = new System.Windows.Forms.TextBox();
             this.usernameSignUpLabel = new System.Windows.Forms.Label();
-            this.SignUpPanel = new System.Windows.Forms.Panel();
             this.SignUpPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.togglePictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // SignUpPanel
+            // 
+            this.SignUpPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SignUpPanel.BackgroundImage = global::FinalQA_Project.Properties.Resources.Sign_up;
+            this.SignUpPanel.Controls.Add(this.togglePictureBox);
+            this.SignUpPanel.Controls.Add(this.signUpButton);
+            this.SignUpPanel.Controls.Add(this.usernameBoxSignUp);
+            this.SignUpPanel.Controls.Add(this.idSignUpLabel);
+            this.SignUpPanel.Controls.Add(this.passwordBoxSignUp);
+            this.SignUpPanel.Controls.Add(this.passwordSignUpLabel);
+            this.SignUpPanel.Controls.Add(this.idBoxSignUp);
+            this.SignUpPanel.Controls.Add(this.usernameSignUpLabel);
+            this.SignUpPanel.Location = new System.Drawing.Point(0, 78);
+            this.SignUpPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.SignUpPanel.Name = "SignUpPanel";
+            this.SignUpPanel.Size = new System.Drawing.Size(915, 778);
+            this.SignUpPanel.TabIndex = 9;
+            // 
+            // togglePictureBox
+            // 
+            this.togglePictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.togglePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.togglePictureBox.Location = new System.Drawing.Point(451, 244);
+            this.togglePictureBox.Name = "togglePictureBox";
+            this.togglePictureBox.Size = new System.Drawing.Size(72, 63);
+            this.togglePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.togglePictureBox.TabIndex = 9;
+            this.togglePictureBox.TabStop = false;
+            this.togglePictureBox.Click += new System.EventHandler(this.togglePictureBox_Click);
             // 
             // signUpButton
             // 
@@ -82,6 +114,7 @@
             this.passwordBoxSignUp.Location = new System.Drawing.Point(45, 175);
             this.passwordBoxSignUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.passwordBoxSignUp.Name = "passwordBoxSignUp";
+            this.passwordBoxSignUp.PasswordChar = '*';
             this.passwordBoxSignUp.Size = new System.Drawing.Size(216, 22);
             this.passwordBoxSignUp.TabIndex = 2;
             // 
@@ -117,23 +150,6 @@
             this.usernameSignUpLabel.TabIndex = 4;
             this.usernameSignUpLabel.Text = "Username";
             // 
-            // SignUpPanel
-            // 
-            this.SignUpPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.SignUpPanel.BackgroundImage = global::FinalQA_Project.Properties.Resources.Sign_up;
-            this.SignUpPanel.Controls.Add(this.signUpButton);
-            this.SignUpPanel.Controls.Add(this.usernameBoxSignUp);
-            this.SignUpPanel.Controls.Add(this.idSignUpLabel);
-            this.SignUpPanel.Controls.Add(this.passwordBoxSignUp);
-            this.SignUpPanel.Controls.Add(this.passwordSignUpLabel);
-            this.SignUpPanel.Controls.Add(this.idBoxSignUp);
-            this.SignUpPanel.Controls.Add(this.usernameSignUpLabel);
-            this.SignUpPanel.Location = new System.Drawing.Point(0, 78);
-            this.SignUpPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.SignUpPanel.Name = "SignUpPanel";
-            this.SignUpPanel.Size = new System.Drawing.Size(915, 778);
-            this.SignUpPanel.TabIndex = 9;
-            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -149,6 +165,7 @@
             this.Text = "Sign Up";
             this.SignUpPanel.ResumeLayout(false);
             this.SignUpPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.togglePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -163,5 +180,6 @@
         private System.Windows.Forms.Label idSignUpLabel;
         private MaterialSkin.Controls.MaterialRaisedButton signUpButton;
         private System.Windows.Forms.Panel SignUpPanel;
+        private System.Windows.Forms.PictureBox togglePictureBox;
     }
 }

@@ -118,6 +118,20 @@ namespace FinalQA_Project
 
         }
 
+        bool passwordVisible = false; // Variable to track the password visibility state
 
+        private void togglePictureBox_Click(object sender, EventArgs e)
+        {
+            passwordVisible = !passwordVisible; // Toggle the password visibility state
+
+            if (passwordVisible)
+            {
+                passwordBoxSignUp.PasswordChar = '\0'; // Show the password
+            }
+            else
+            {
+                passwordBoxSignUp.PasswordChar = '*'; // Hide the password
+            }
+        }
     }
 }

@@ -37,6 +37,7 @@
             this.SearchBirdImg = new System.Windows.Forms.PictureBox();
             this.SearchCageImg = new System.Windows.Forms.PictureBox();
             this.AddCageImg = new System.Windows.Forms.PictureBox();
+            this.LogoutButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.MainFormPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AddBirdImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SearchBirdImg)).BeginInit();
@@ -47,6 +48,7 @@
             // MainFormPanel
             // 
             this.MainFormPanel.BackColor = System.Drawing.Color.DimGray;
+            this.MainFormPanel.Controls.Add(this.LogoutButton);
             this.MainFormPanel.Controls.Add(this.SearchCageMainFormLabel);
             this.MainFormPanel.Controls.Add(this.AddCageMainFormLabel);
             this.MainFormPanel.Controls.Add(this.SearchBirdMainFormLabel);
@@ -56,7 +58,7 @@
             this.MainFormPanel.Controls.Add(this.SearchCageImg);
             this.MainFormPanel.Controls.Add(this.AddCageImg);
             this.MainFormPanel.Location = new System.Drawing.Point(0, 78);
-            this.MainFormPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MainFormPanel.Margin = new System.Windows.Forms.Padding(4);
             this.MainFormPanel.Name = "MainFormPanel";
             this.MainFormPanel.Size = new System.Drawing.Size(967, 505);
             this.MainFormPanel.TabIndex = 4;
@@ -115,9 +117,9 @@
             // 
             // AddBirdImg
             // 
-            this.AddBirdImg.BackColor = System.Drawing.Color.White;
-            this.AddBirdImg.BackgroundImage = global::FinalQA_Project.Properties.Resources.Add_Bird;
+            this.AddBirdImg.BackColor = System.Drawing.Color.Transparent;
             this.AddBirdImg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddBirdImg.Image = global::FinalQA_Project.Properties.Resources.Add_Bird;
             this.AddBirdImg.Location = new System.Drawing.Point(155, 38);
             this.AddBirdImg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddBirdImg.Name = "AddBirdImg";
@@ -129,8 +131,9 @@
             // 
             // SearchBirdImg
             // 
-            this.SearchBirdImg.BackgroundImage = global::FinalQA_Project.Properties.Resources.Search_Bird;
+            this.SearchBirdImg.BackColor = System.Drawing.Color.Transparent;
             this.SearchBirdImg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SearchBirdImg.Image = global::FinalQA_Project.Properties.Resources.Search_Bird;
             this.SearchBirdImg.Location = new System.Drawing.Point(565, 38);
             this.SearchBirdImg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SearchBirdImg.Name = "SearchBirdImg";
@@ -142,8 +145,9 @@
             // 
             // SearchCageImg
             // 
-            this.SearchCageImg.BackgroundImage = global::FinalQA_Project.Properties.Resources.Search_Cage;
+            this.SearchCageImg.BackColor = System.Drawing.Color.Transparent;
             this.SearchCageImg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SearchCageImg.Image = global::FinalQA_Project.Properties.Resources.Search_Cage;
             this.SearchCageImg.Location = new System.Drawing.Point(565, 272);
             this.SearchCageImg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SearchCageImg.Name = "SearchCageImg";
@@ -151,11 +155,13 @@
             this.SearchCageImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.SearchCageImg.TabIndex = 1;
             this.SearchCageImg.TabStop = false;
+            this.SearchCageImg.Click += new System.EventHandler(this.SearchCaveImg_Click);
             // 
             // AddCageImg
             // 
-            this.AddCageImg.BackgroundImage = global::FinalQA_Project.Properties.Resources.Add_Cage;
+            this.AddCageImg.BackColor = System.Drawing.Color.Transparent;
             this.AddCageImg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddCageImg.Image = global::FinalQA_Project.Properties.Resources.Add_Cage;
             this.AddCageImg.Location = new System.Drawing.Point(155, 272);
             this.AddCageImg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddCageImg.Name = "AddCageImg";
@@ -164,6 +170,26 @@
             this.AddCageImg.TabIndex = 2;
             this.AddCageImg.TabStop = false;
             this.AddCageImg.Click += new System.EventHandler(this.AddCageImg_Click);
+            // 
+            // LogoutButton
+            // 
+            this.LogoutButton.AutoSize = true;
+            this.LogoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.LogoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LogoutButton.Depth = 0;
+            this.LogoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LogoutButton.Icon = null;
+            this.LogoutButton.Location = new System.Drawing.Point(876, 2);
+            this.LogoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LogoutButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.LogoutButton.Name = "LogoutButton";
+            this.LogoutButton.Primary = true;
+            this.LogoutButton.Size = new System.Drawing.Size(88, 36);
+            this.LogoutButton.TabIndex = 8;
+            this.LogoutButton.Text = "Logout";
+            this.LogoutButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // MainForm
             // 
@@ -201,5 +227,6 @@
         private System.Windows.Forms.Label AddCageMainFormLabel;
         private System.Windows.Forms.Label SearchBirdMainFormLabel;
         private System.Windows.Forms.Label AddBirdlMainFormLabel;
+        private MaterialSkin.Controls.MaterialRaisedButton LogoutButton;
     }
 }

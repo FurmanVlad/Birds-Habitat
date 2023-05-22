@@ -12,6 +12,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 using MaterialSkin;
 using MaterialSkin.Controls;
 
+
 namespace FinalQA_Project
 {
     public partial class LoginForm : MaterialForm
@@ -20,7 +21,6 @@ namespace FinalQA_Project
         {
             InitializeComponent();
 
-            
         }
 
 
@@ -91,6 +91,22 @@ namespace FinalQA_Project
         {
             SignUpForm signUpForm = new SignUpForm();
             signUpForm.Show();
+        }
+
+
+        bool passwordVisible = false; // Variable to track the password visibility state
+        private void togglePictureBox_Click(object sender, EventArgs e)
+        {
+            passwordVisible = !passwordVisible; // Toggle the password visibility state
+
+            if (passwordVisible)
+            {
+                passwordBoxLogin.PasswordChar = '\0'; // Show the password
+            }
+            else
+            {
+                passwordBoxLogin.PasswordChar = '*'; // Hide the password
+            }
         }
 
     }

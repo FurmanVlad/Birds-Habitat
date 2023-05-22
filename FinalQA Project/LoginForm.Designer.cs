@@ -35,7 +35,9 @@
             this.passwordLoginLabel = new System.Windows.Forms.Label();
             this.LoginButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.LoginPanel = new System.Windows.Forms.Panel();
+            this.togglePictureBox = new System.Windows.Forms.PictureBox();
             this.LoginPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.togglePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // usernameBoxLogin
@@ -51,6 +53,7 @@
             this.passwordBoxLogin.Location = new System.Drawing.Point(35, 204);
             this.passwordBoxLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.passwordBoxLogin.Name = "passwordBoxLogin";
+            this.passwordBoxLogin.PasswordChar = '*';
             this.passwordBoxLogin.Size = new System.Drawing.Size(321, 22);
             this.passwordBoxLogin.TabIndex = 1;
             // 
@@ -114,6 +117,7 @@
             // LoginPanel
             // 
             this.LoginPanel.BackgroundImage = global::FinalQA_Project.Properties.Resources.Login;
+            this.LoginPanel.Controls.Add(this.togglePictureBox);
             this.LoginPanel.Controls.Add(this.passwordBoxLogin);
             this.LoginPanel.Controls.Add(this.LoginButton);
             this.LoginPanel.Controls.Add(this.usernameBoxLogin);
@@ -125,6 +129,18 @@
             this.LoginPanel.Name = "LoginPanel";
             this.LoginPanel.Size = new System.Drawing.Size(829, 773);
             this.LoginPanel.TabIndex = 7;
+            // 
+            // togglePictureBox
+            // 
+            this.togglePictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.togglePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.togglePictureBox.Location = new System.Drawing.Point(523, 237);
+            this.togglePictureBox.Name = "togglePictureBox";
+            this.togglePictureBox.Size = new System.Drawing.Size(72, 63);
+            this.togglePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.togglePictureBox.TabIndex = 10;
+            this.togglePictureBox.TabStop = false;
+            this.togglePictureBox.Click += new System.EventHandler(this.togglePictureBox_Click);
             // 
             // LoginForm
             // 
@@ -143,6 +159,7 @@
             this.Text = "Login";
             this.LoginPanel.ResumeLayout(false);
             this.LoginPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.togglePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -156,6 +173,7 @@
         private System.Windows.Forms.Label passwordLoginLabel;
         private MaterialSkin.Controls.MaterialRaisedButton LoginButton;
         private System.Windows.Forms.Panel LoginPanel;
+        private System.Windows.Forms.PictureBox togglePictureBox;
     }
 }
 

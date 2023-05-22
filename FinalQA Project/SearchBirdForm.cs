@@ -12,12 +12,15 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
+using System.Diagnostics;
 
 namespace FinalQA_Project
 {
     public partial class SearchBirdForm : MaterialForm
     {
+        private bool isFatherSearch = false;
         private DataGridView dataGridView1 = new DataGridView();
+        
         public SearchBirdForm()
         {
             InitializeComponent();
@@ -30,6 +33,19 @@ namespace FinalQA_Project
             hatchDateSearchBirdLabel.Visible = false;
             dateTimePickerSearchBird.Visible = false;
 
+        }
+        public SearchBirdForm(bool IsFatherSearch)
+        {
+            InitializeComponent();
+            serialNumberSearchBirdLabel.Visible = false;
+            SearchBirdSerialTextBox.Visible = false;
+            genderSearchBirdLabel.Visible = false;
+            GenderComboBox.Visible = false;
+            speciesSearchBirdLabel.Visible = false;
+            SpeciesSearchBirdComboBox.Visible = false;
+            hatchDateSearchBirdLabel.Visible = false;
+            dateTimePickerSearchBird.Visible = false;
+            this.isFatherSearch = IsFatherSearch;
         }
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -46,44 +62,34 @@ namespace FinalQA_Project
             if (selectedOption == "Serial Number")
             {
                 serialNumberSearchBirdLabel.Visible = true;
-                SearchBirdSerialTextBox.Visible = true;
-               
-
+                SearchBirdSerialTextBox.Visible = true;             
             }
             else if (selectedOption == "Gender")
             {
                 // Show the gender combo box
                 genderSearchBirdLabel.Visible = true;
-                GenderComboBox.Visible = true;
-               
-
+                GenderComboBox.Visible = true;              
             }
             else if (selectedOption == "Species")
             {
                
                 speciesSearchBirdLabel.Visible = true;
-                SpeciesSearchBirdComboBox.Visible = true;
-                
+                SpeciesSearchBirdComboBox.Visible = true;         
             }
             else if (selectedOption == "Hatch Date")
-            {
-
-              
+            {         
                 hatchDateSearchBirdLabel.Visible = true;
                 dateTimePickerSearchBird.Visible = true;
-
             }
         }
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             // Create a new Excel Application object
             Application excelApp = new Application();
 
             // Open the Excel workbook containing the login information
-            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
-
+            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+            //
             // Get the Worksheet object for the sheet containing the login information
             Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
             string selectedOption = searchOptionComboBox.Text;
@@ -93,7 +99,6 @@ namespace FinalQA_Project
                 ClosingAll(excelApp, workbook, worksheet);
                 return;
             }
-
             if (selectedOption == "Serial Number")
             {
                 string serialnum = SearchBirdSerialTextBox.Text;
@@ -134,10 +139,7 @@ namespace FinalQA_Project
                         ClosingAll(excelApp, workbook, worksheet);
                         return;
                     }
-
                 }
-
-
             }
             if (selectedOption == "Gender")
             {
@@ -173,34 +175,27 @@ namespace FinalQA_Project
                 SearchBirdFromSheet(worksheet, selectedSpecies, "B:B");
             }
 
-            ClosingAll(excelApp, workbook, worksheet);
-            
-
-
+            ClosingAll(excelApp, workbook, worksheet);          
         }
-
-        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet )
+        public void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet )
         {
             workbook.Close();
             excelApp.Quit();
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
-
         }
-
-        private void SearchBirdFromSheet(Worksheet worksheet, string comboBoxPick,string col) {
+        public void SearchBirdFromSheet(Worksheet worksheet, string comboBoxPick,string col) {
             ShowResultBirdSearch resultForm = new ShowResultBirdSearch();
 
-            Range range = worksheet.Range[col]; // Assuming the gender column is column E
+            Range range = worksheet.Range[col]; 
 
             Range foundRange = range.Find(comboBoxPick, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
-
+            
             if (foundRange != null)
             {
                 Range firstCell = foundRange;
                 List<object[]> matchingRows = new List<object[]>();
-
                 do
                 {
                     int row = firstCell.Row;
@@ -229,11 +224,27 @@ namespace FinalQA_Project
                 MessageBox.Show("No birds found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            resultForm.Show();
-        }
            
-    }
+            resultForm.Show();           
+        }
+        private void YourForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CloseExcelProcesses();
+        }
 
+        private void CloseExcelProcesses()
+        {
+            MessageBox.Show("Are you sure you want to exit?");
+            // Get all running Excel processes
+            Process[] processes = Process.GetProcessesByName("EXCEL");
+
+            // Close each Excel process
+            foreach (Process process in processes)
+            {
+                process.CloseMainWindow();
+                process.Close();
+            }
+        }
+    }
  }
 

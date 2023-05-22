@@ -31,6 +31,8 @@ namespace FinalQA_Project
             }
         }
 
+
+
         private void AddBirdImg_Click(object sender, EventArgs e)
         {
             AddBirdForm addBirdForm = new AddBirdForm();
@@ -48,7 +50,18 @@ namespace FinalQA_Project
             SearchBirdForm searchBirdForm = new SearchBirdForm();
             searchBirdForm.Show();
         }
+        private void SearchCaveImg_Click(object sender,EventArgs e)
+        {
+            SearchCage searchCage = new SearchCage();
+            searchCage.Show();
 
-       
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+        }
     }
 }

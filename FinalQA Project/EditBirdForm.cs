@@ -7,36 +7,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Office.Interop.Excel;
-using Application = Microsoft.Office.Interop.Excel.Application;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using Microsoft.Office.Interop.Excel;
+using Application = Microsoft.Office.Interop.Excel.Application;
 using System.Reflection;
-using System.Diagnostics;
 
 namespace FinalQA_Project
 {
-    public partial class AddBirdForm : MaterialForm
+    public partial class EditBirdForm : MaterialForm
     {
-        public AddBirdForm()
-        {
-            InitializeComponent();
-        }
 
-        //
-        // Species Combo Box mapping
-        //
-        // Define a dictionary to store the mapping between species and subspecies
+        private ShowResultBirdSearch _showResultForm;
+        
+
+        public EditBirdForm( object[] birdData, ShowResultBirdSearch showResultForm)
+        {
+            
+            InitializeComponent();
+            _showResultForm = showResultForm;
+
+            SerialNumberTextBox.Text = birdData[0]?.ToString();
+            SerialNumberTextBox.Enabled = false;
+            SpeciesComboBox.SelectedItem = birdData[1]?.ToString();
+            if (subspeciesMapping.ContainsKey(birdData[1]?.ToString()))
+            {
+                // Populate the "Subspecies" ComboBox with the corresponding subspecies
+                List<string> subspecies = subspeciesMapping[birdData[1]?.ToString()];
+                //SubspeciesComboBox.Items.AddRange(subspecies.ToArray());
+            }
+            
+            SubspeciesComboBox.SelectedItem = birdData[2]?.ToString();
+            HatchingDateTimePicker.Value = DateTime.Parse(birdData[3]?.ToString());
+            GenderComboBox.SelectedItem = birdData[4]?.ToString();
+            CageSerialNumberTextBox.Text = birdData[5]?.ToString();
+            FatherSerialNumberTextBox.Text = birdData[6]?.ToString();
+            MotherSerialNumberTextBox.Text= birdData[7]?.ToString();
+            HeadColorComboBox.Text = birdData[8]?.ToString();
+            BreastColorComboBox.Text = birdData[9]?.ToString();
+            BodyColorComboBox.Text = birdData[10]?.ToString(); 
+        }
+        Dictionary<string, List<string>> BodyColorMapping = new Dictionary<string, List<string>>() {
+            {"Female",new List<string> { "Green","Yellow","Silver","Blue"} },
+            {"Male",new List<string>{"Green","Silver","Yellow","Blue","Pastel", "Diluted" } }
+        };
         Dictionary<string, List<string>> subspeciesMapping = new Dictionary<string, List<string>>() {
             { "American Gouldian", new List<string> { "North America", "Central America", "South America" } },
             { "European Gouldian", new List<string> { "Eastern Europe", "Western Europe" } },
             { "Australian Gouldian", new List<string> { "Central Australia", "Coastal cities" } }
         };
-        Dictionary<string, List<string>> BodyColorMapping = new Dictionary<string, List<string>>() {
-            {"Female",new List<string> { "Green","Yellow","Silver","Blue"} },
-            {"Male",new List<string>{"Green","Silver","Yellow","Blue","Pastel", "Diluted" } }
-        };
-        
 
         // Event handler for the "Species" ComboBox selection
         private void SpeciesComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,7 +73,6 @@ namespace FinalQA_Project
                 List<string> subspecies = subspeciesMapping[selectedSpecies];
                 SubspeciesComboBox.Items.AddRange(subspecies.ToArray());
             }
-
         }
         private void BodyColorComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -71,10 +89,9 @@ namespace FinalQA_Project
                 BodyColorComboBox.Items.AddRange(subspecies.ToArray());
             }
         }
+        private void EditButton_Click(object sender,EventArgs e)
 
-        public void AddBirdButton_Click(object sender, EventArgs e)
         {
-            // Capture the data entered by the user
             string serialNumber = SerialNumberTextBox.Text;
             string species = SpeciesComboBox.Text;
             string subspecies = SubspeciesComboBox.Text;
@@ -87,74 +104,77 @@ namespace FinalQA_Project
             string breastColor = BreastColorComboBox.Text;
             string bodyColor = BodyColorComboBox.Text;
 
+           
 
             // Validate the input data
             bool inputValid = ValidateInput(serialNumber, species, subspecies, gender, cageSerialNumber, fatherSerialNumber, motherSerialNumber, headColor, breastColor, bodyColor);
             if (!inputValid) { return; }
-
             try
             {
-                Console.WriteLine("wtf");
                 // Create a new Excel Application object
                 Application excelApp = new Application();
 
-                // Open the Excel workbook containing the habitat information
+                // Open the Excel workbook containing the login information
                 Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
-
-                // Get the Worksheet object for the sheet containing the habitat information
-                Worksheet worksheetBird = (Worksheet)workbook.Worksheets["Birds"];
+                //
+                // Get the Worksheet object for the sheet containing the login information
+                Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
                 Worksheet worksheetCage = (Worksheet)workbook.Worksheets["Cages"];
-
-                // Check if the serial number already exists in the worksheet
-                Range serialNumberRange = worksheetBird.Range["A:A"].Find(serialNumber, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
-                Range cageSerialNumberRange = worksheetCage.Range["A:A"].Find(cageSerialNumber, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
-
-                if (serialNumberRange != null)
+                Range cageSerialNumberRange = worksheetCage.Range["A:A"].Find(CageSerialNumberTextBox.Text, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
+                Range serialNumberRange = worksheet.Range["A:A"].Find(SerialNumberTextBox.Text, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
+                if (serialNumberRange == null)
                 {
-                    MessageBox.Show("Error!\nSerial number already exists.", "Duplicate serial number", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
+                    MessageBox.Show("Bird does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ClosingAll(excelApp, workbook, worksheet);
                     return;
                 }
-
                 // Check if the cage serial number exists in the worksheet
                 if (cageSerialNumberRange == null)
                 {
                     MessageBox.Show("Error!\nCage serial number not exists.", "Invalid cage serial number", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
+                    ClosingAll(excelApp, workbook, worksheet, worksheetCage);
                     return;
                 }
 
-                // Add the new bird to the worksheet
-                int lastRow = worksheetBird.UsedRange.Rows.Count + 1;
+                int rowNumber = serialNumberRange.Row;
 
-                worksheetBird.Cells[lastRow, 1] = serialNumber;
-                worksheetBird.Cells[lastRow, 2] = species;
-                worksheetBird.Cells[lastRow, 3] = subspecies;
-                worksheetBird.Cells[lastRow, 4] = hatchingDate;
-                worksheetBird.Cells[lastRow, 5] = gender;
-                worksheetBird.Cells[lastRow, 6] = cageSerialNumber;
-                worksheetBird.Cells[lastRow, 7] = fatherSerialNumber;
-                worksheetBird.Cells[lastRow, 8] = motherSerialNumber;
-                worksheetBird.Cells[lastRow, 9] = headColor;
-                worksheetBird.Cells[lastRow, 10] = breastColor;
-                worksheetBird.Cells[lastRow, 11] = bodyColor;
+                // Update the row with the user's input
+                worksheet.Cells[rowNumber, 1].Value = SerialNumberTextBox.Text;
+                worksheet.Cells[rowNumber, 2].Value = SpeciesComboBox.SelectedItem.ToString();
+                worksheet.Cells[rowNumber, 3].Value = SubspeciesComboBox.SelectedItem.ToString();
+                worksheet.Cells[rowNumber, 4].Value = HatchingDateTimePicker.Value.ToString();
+                worksheet.Cells[rowNumber, 5].Value = GenderComboBox.SelectedItem.ToString();
+                worksheet.Cells[rowNumber, 6].Value = CageSerialNumberTextBox.Text;
+                worksheet.Cells[rowNumber, 7].Value = FatherSerialNumberTextBox.Text;
+                worksheet.Cells[rowNumber, 8].Value = MotherSerialNumberTextBox.Text;
+                worksheet.Cells[rowNumber, 9].Value = HeadColorComboBox.Text;
+                worksheet.Cells[rowNumber, 10].Value = BreastColorComboBox.Text;
+                worksheet.Cells[rowNumber, 11].Value = BodyColorComboBox.Text;
+                
 
+                workbook.Save();
+                ClosingAll(excelApp, workbook, worksheet);
+                MessageBox.Show("Bird has been updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
-                // Close the workbook and the Excel application
-                ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
-                MessageBox.Show("New bird added.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
-            }
-            catch (Exception ex)
+            }catch (Exception ex)
             {
-                MessageBox.Show("Error adding new bird: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error Editing: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
+        
+        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
+        {
+            workbook.Close();
+            excelApp.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
 
-
-        // Close the workbook and the Excel application
-        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheetBird, Worksheet worksheetCage) {
+        }
+        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheetBird, Worksheet worksheetCage)
+        {
             workbook.Save();
             workbook.Close();
             excelApp.Quit();
@@ -181,12 +201,21 @@ namespace FinalQA_Project
                 return false;
             }
 
+
+
+
             /////////////////// species ///////////////////
             if (string.IsNullOrEmpty(species))
             {
                 MessageBox.Show("Please enter species.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+
+
+
+
+
+
             /////////////////// subspecies ///////////////////
             if (string.IsNullOrEmpty(subspecies))
             {
@@ -194,7 +223,7 @@ namespace FinalQA_Project
                 return false;
             }
 
-            
+
 
 
 
@@ -211,6 +240,11 @@ namespace FinalQA_Project
                 MessageBox.Show("Please enter gender.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+
+
+
+
+
 
             /////////////////// cageSerialNumber ///////////////////
             if (string.IsNullOrEmpty(cageSerialNumber))
@@ -262,7 +296,7 @@ namespace FinalQA_Project
 
 
             // Check if the mothers or fathers serial number different from the bird itself
-            if (motherSerialNumber == serialNumber || serialNumber  == fatherSerialNumber)
+            if (motherSerialNumber == serialNumber || serialNumber == fatherSerialNumber)
             {
                 MessageBox.Show("Parent's serial numbers cannot be the same the as the bird you want to add.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -310,8 +344,6 @@ namespace FinalQA_Project
 
             return true;
         }
-
-
         // Returns true if the input string contains only alphabetical characters
         public bool IsAlphabetic(string s)
         {
@@ -366,28 +398,9 @@ namespace FinalQA_Project
                 }
             }
 
-            return hasLetter && hasNumber;  
-        }
-        private void YourForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            CloseExcelProcesses();
-        }
-
-        private void CloseExcelProcesses()
-        {
-            MessageBox.Show("Are you sure you want to exit?");
-            // Get all running Excel processes
-            Process[] processes = Process.GetProcessesByName("EXCEL");
-
-            // Close each Excel process
-            foreach (Process process in processes)
-            {
-                process.CloseMainWindow();
-                process.Close();
-            }
+            return hasLetter && hasNumber;
         }
 
 
     }
-
 }
