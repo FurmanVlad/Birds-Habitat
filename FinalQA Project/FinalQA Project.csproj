@@ -82,6 +82,18 @@
     <Compile Include="AddCageForm.Designer.cs">
       <DependentUpon>AddCageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddChickForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddChickForm.Designer.cs">
+      <DependentUpon>AddChickForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditBirdForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBirdForm.Designer.cs">
+      <DependentUpon>EditBirdForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,11 +119,23 @@
     <Compile Include="SearchBirdForm.Designer.cs">
       <DependentUpon>SearchBirdForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchCage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchCage.Designer.cs">
+      <DependentUpon>SearchCage.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowResultBirdSearch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ShowResultBirdSearch.Designer.cs">
       <DependentUpon>ShowResultBirdSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowResultCageSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowResultCageSearch.Designer.cs">
+      <DependentUpon>ShowResultCageSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="SignUpForm.cs">
       <SubType>Form</SubType>
@@ -124,6 +148,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddCageForm.resx">
       <DependentUpon>AddCageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddChickForm.resx">
+      <DependentUpon>AddChickForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditBirdForm.resx">
+      <DependentUpon>EditBirdForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -139,8 +169,14 @@
     <EmbeddedResource Include="SearchBirdForm.resx">
       <DependentUpon>SearchBirdForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SearchCage.resx">
+      <DependentUpon>SearchCage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ShowResultBirdSearch.resx">
       <DependentUpon>ShowResultBirdSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowResultCageSearch.resx">
+      <DependentUpon>ShowResultCageSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
@@ -205,6 +241,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Sign up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />
