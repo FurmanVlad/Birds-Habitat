@@ -17,6 +17,7 @@ namespace FinalQA_Project
 {
     public partial class SignUpForm : MaterialForm
     {
+        public bool IsMsg;
         public SignUpForm()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace FinalQA_Project
 
 
         // Event handler for the registration button
-        private void signUpButton_Click(object sender, EventArgs e)
+        public void signUpButton_Click(object sender, EventArgs e)
         {
             // Get the entered registration information
             string username = usernameBoxSignUp.Text;
@@ -41,6 +42,7 @@ namespace FinalQA_Project
             if (username.Length < 6 || username.Length > 8 || !username.All(c => char.IsLetter(c) || char.IsDigit(c)) || username.Count(c => char.IsDigit(c)) > 2)
             {
                 MessageBox.Show("Username must be between 6 and 8 characters, contain at most 2 digits, and only contain letters and digits.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                IsMsg = true;
                 return;
             }
 
@@ -103,12 +105,17 @@ namespace FinalQA_Project
 
                 // Display a message indicating that the registration was successful
                 MessageBox.Show("Registration successful!");
-
+                ClosingAll(excelApp, workbook, worksheet);
                 // Close the registration form
                 this.Close();
             }
 
-            // Close the workbook and the Excel application
+            ClosingAll(excelApp, workbook, worksheet);
+        }
+
+        // Close the workbook and the Excel application
+        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
+        {
             workbook.Save();
             workbook.Close();
             excelApp.Quit();

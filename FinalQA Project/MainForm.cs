@@ -36,32 +36,37 @@ namespace FinalQA_Project
         private void AddBirdImg_Click(object sender, EventArgs e)
         {
             AddBirdForm addBirdForm = new AddBirdForm();
-            addBirdForm.Show();
+            addBirdForm.ShowDialog();
         }
 
         private void AddCageImg_Click(object sender, EventArgs e)
         {
             AddCageForm addCageForm = new AddCageForm();
-            addCageForm.Show();
+            addCageForm.ShowDialog();
         }
 
         private void SearchBirdImg_Click(object sender, EventArgs e)
         {
             SearchBirdForm searchBirdForm = new SearchBirdForm();
-            searchBirdForm.Show();
+            searchBirdForm.ShowDialog();
         }
         private void SearchCaveImg_Click(object sender,EventArgs e)
         {
             SearchCage searchCage = new SearchCage();
-            searchCage.Show();
+            searchCage.ShowDialog();
 
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            LoginForm loginForm = new LoginForm();
-            loginForm.Show();
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Confirm logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+            }
+            
         }
     }
 }

@@ -23,54 +23,54 @@ namespace FinalQA_Project
         }
         public void AddRowToDataGridView(object[] rowData)
         {
-
-            if (!dataGridView1.Columns.Contains("Select"))
+            if (!dataGridView1.Columns.Contains("View"))
             {
                 DataGridViewButtonColumn selectButtonColumn = new DataGridViewButtonColumn();
-                
-                selectButtonColumn.Name = "Select";
-                selectButtonColumn.HeaderText = "Select";
+
+                selectButtonColumn.Name = "View";
+                selectButtonColumn.HeaderText = "View";
                 dataGridView1.Columns.Add(selectButtonColumn);
             }
             int rowIndex = dataGridView1.Rows.Add(rowData);
-            
-            dataGridView1.Rows[rowIndex].Cells["Select"].Value = "Select";
-            
-            
+            dataGridView1.Rows[rowIndex].Cells["View"].Value = "View";
             dataGridView1.Sort(dataGridView1.Columns["SerialNumberCol"], ListSortDirection.Ascending);
         }
+
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow clickedRow = dataGridView1.Rows[e.RowIndex];
-            object[] rowData = clickedRow.Cells.Cast<DataGridViewCell>()
-
-                                    .Select(cell => cell.Value)
-                                    .ToArray();
-            
-            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["Select"].Index)
+            if (e.RowIndex >= 0)
             {
-                Console.WriteLine("12345555");
-                clickedRow = dataGridView1.Rows[e.RowIndex];
-                string serialNumber = clickedRow.Cells["SerialNumberCol"].Value.ToString();
-                try
-                {
-                    // Create a new Excel Application object
-                    Application excelApp = new Application();
+                DataGridViewRow clickedRow = dataGridView1.Rows[e.RowIndex];
+                object[] rowData = clickedRow.Cells.Cast<DataGridViewCell>()
 
-                    // Open the Excel workbook containing the login information
-                    Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
-                    //
-                    // Get the Worksheet object for the sheet containing the login information
-                    Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
-                    SearchBirdForm searchBirdForm = new SearchBirdForm();
-                    SearchBirdFromSheet(worksheet,serialNumber, "F:F");
-                    searchBirdForm.ClosingAll(excelApp, workbook, worksheet);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error Searching cage: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                                        .Select(cell => cell.Value)
+                                        .ToArray();
 
+                if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["View"].Index)
+                {
+
+                    clickedRow = dataGridView1.Rows[e.RowIndex];
+                    string serialNumber = clickedRow.Cells["SerialNumberCol"].Value.ToString();
+                    try
+                    {
+                        // Create a new Excel Application object
+                        Application excelApp = new Application();
+
+                        // Open the Excel workbook containing the login information
+                        Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
+                        //
+                        // Get the Worksheet object for the sheet containing the login information
+                        Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
+                        SearchBirdForm searchBirdForm = new SearchBirdForm();
+                        SearchBirdFromSheet(worksheet, serialNumber, "F:F");
+                        searchBirdForm.ClosingAll(excelApp, workbook, worksheet);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error Searching cage: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
             }
             
         }
@@ -115,7 +115,7 @@ namespace FinalQA_Project
                 return;
             }
 
-            resultForm.Show();
+            resultForm.ShowDialog();
         }
     }
 }

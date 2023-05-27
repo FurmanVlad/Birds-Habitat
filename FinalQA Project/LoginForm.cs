@@ -20,28 +20,27 @@ namespace FinalQA_Project
         public LoginForm()
         {
             InitializeComponent();
+        }
+
+    private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            e.Cancel = true;
+            Environment.Exit(0);
 
         }
 
 
+
+        public bool loginSuccessful;
+
         // Event handler for the login button
-        private void LoginButton_Click(object sender, EventArgs e)
+        public void LoginButton_Click(object sender, EventArgs e)
         {
             // Get the entered username and password
             string username = usernameBoxLogin.Text;
             string password = passwordBoxLogin.Text;
 
-            if (string.IsNullOrEmpty(username))
-            {
-                MessageBox.Show("Please enter username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Please enter password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             // Create a new Excel Application object
             Application excelApp = new Application();
@@ -52,8 +51,24 @@ namespace FinalQA_Project
             // Get the Worksheet object for the sheet containing the login information
             Worksheet worksheet = (Worksheet)workbook.Worksheets["Main"];
 
+
+            if (string.IsNullOrEmpty(username))
+            {
+                MessageBox.Show("Please enter username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ClosingAll(excelApp, workbook, worksheet);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ClosingAll(excelApp, workbook, worksheet);
+                return;
+            }
+            
+
             // Loop through the rows of the worksheet and check each row's username and password
-            bool loginSuccessful = false;
+            loginSuccessful = false;
             for (int row = 2; row <= worksheet.UsedRange.Rows.Count; row++)
             {
                 string rowUsername = ((Range)worksheet.Cells[row, 1]).Value;
@@ -68,6 +83,7 @@ namespace FinalQA_Project
             // Display a message indicating whether the login was successful or not
             if (loginSuccessful)
             {
+                MessageBox.Show("Login successful");
                 MainForm mainForm = new MainForm();
                 mainForm.Show();
                 this.Hide();
@@ -77,7 +93,13 @@ namespace FinalQA_Project
                 MessageBox.Show("Login failed. Please try again.");
             }
 
-            // Close the workbook and the Excel application
+            ClosingAll(excelApp, workbook, worksheet);
+
+        }
+
+        // Close the workbook and the Excel application
+        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
+        {
             workbook.Save();
             workbook.Close();
             excelApp.Quit();
@@ -86,15 +108,15 @@ namespace FinalQA_Project
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
 
         }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SignUpForm signUpForm = new SignUpForm();
-            signUpForm.Show();
+            signUpForm.ShowDialog();
         }
 
 
         bool passwordVisible = false; // Variable to track the password visibility state
+
         private void togglePictureBox_Click(object sender, EventArgs e)
         {
             passwordVisible = !passwordVisible; // Toggle the password visibility state

@@ -18,8 +18,9 @@ namespace FinalQA_Project
 {
     public partial class SearchBirdForm : MaterialForm
     {
+        public ShowResultBirdSearch resultForm;
         private bool isFatherSearch = false;
-        private DataGridView dataGridView1 = new DataGridView();
+        //public DataGridView dataGridView2 = new DataGridView();
         
         public SearchBirdForm()
         {
@@ -82,13 +83,13 @@ namespace FinalQA_Project
                 dateTimePickerSearchBird.Visible = true;
             }
         }
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
             // Create a new Excel Application object
             Application excelApp = new Application();
 
             // Open the Excel workbook containing the login information
-            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
             //
             // Get the Worksheet object for the sheet containing the login information
             Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
@@ -130,7 +131,7 @@ namespace FinalQA_Project
                     {
                         ShowResultBirdSearch resultForm = new ShowResultBirdSearch();
                         resultForm.AddRowToDataGridView(rowData);
-                        resultForm.Show();
+                        resultForm.ShowDialog();
 
                     }
                     else
@@ -186,7 +187,7 @@ namespace FinalQA_Project
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
         }
         public void SearchBirdFromSheet(Worksheet worksheet, string comboBoxPick,string col) {
-            ShowResultBirdSearch resultForm = new ShowResultBirdSearch();
+            resultForm = new ShowResultBirdSearch();
 
             Range range = worksheet.Range[col]; 
 
@@ -225,16 +226,15 @@ namespace FinalQA_Project
                 return;
             }
            
-            resultForm.Show();           
+            resultForm.ShowDialog();           
         }
-        private void YourForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void SearchBirdForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             CloseExcelProcesses();
         }
 
         private void CloseExcelProcesses()
         {
-            MessageBox.Show("Are you sure you want to exit?");
             // Get all running Excel processes
             Process[] processes = Process.GetProcessesByName("EXCEL");
 

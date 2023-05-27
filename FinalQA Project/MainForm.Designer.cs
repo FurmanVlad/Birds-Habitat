@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.MainFormPanel = new System.Windows.Forms.Panel();
+            this.LogoutButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SearchCageMainFormLabel = new System.Windows.Forms.Label();
             this.AddCageMainFormLabel = new System.Windows.Forms.Label();
             this.SearchBirdMainFormLabel = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.SearchBirdImg = new System.Windows.Forms.PictureBox();
             this.SearchCageImg = new System.Windows.Forms.PictureBox();
             this.AddCageImg = new System.Windows.Forms.PictureBox();
-            this.LogoutButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.MainFormPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AddBirdImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SearchBirdImg)).BeginInit();
@@ -57,11 +57,31 @@
             this.MainFormPanel.Controls.Add(this.SearchBirdImg);
             this.MainFormPanel.Controls.Add(this.SearchCageImg);
             this.MainFormPanel.Controls.Add(this.AddCageImg);
-            this.MainFormPanel.Location = new System.Drawing.Point(0, 78);
+            this.MainFormPanel.Location = new System.Drawing.Point(0, 64);
             this.MainFormPanel.Margin = new System.Windows.Forms.Padding(4);
             this.MainFormPanel.Name = "MainFormPanel";
             this.MainFormPanel.Size = new System.Drawing.Size(967, 505);
             this.MainFormPanel.TabIndex = 4;
+            // 
+            // LogoutButton
+            // 
+            this.LogoutButton.AutoSize = true;
+            this.LogoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.LogoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LogoutButton.Depth = 0;
+            this.LogoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LogoutButton.Icon = null;
+            this.LogoutButton.Location = new System.Drawing.Point(864, 17);
+            this.LogoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LogoutButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.LogoutButton.Name = "LogoutButton";
+            this.LogoutButton.Primary = true;
+            this.LogoutButton.Size = new System.Drawing.Size(88, 36);
+            this.LogoutButton.TabIndex = 8;
+            this.LogoutButton.Text = "Logout";
+            this.LogoutButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // SearchCageMainFormLabel
             // 
@@ -170,26 +190,6 @@
             this.AddCageImg.TabIndex = 2;
             this.AddCageImg.TabStop = false;
             this.AddCageImg.Click += new System.EventHandler(this.AddCageImg_Click);
-            // 
-            // LogoutButton
-            // 
-            this.LogoutButton.AutoSize = true;
-            this.LogoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.LogoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LogoutButton.Depth = 0;
-            this.LogoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LogoutButton.Icon = null;
-            this.LogoutButton.Location = new System.Drawing.Point(876, 2);
-            this.LogoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.LogoutButton.MouseState = MaterialSkin.MouseState.HOVER;
-            this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Primary = true;
-            this.LogoutButton.Size = new System.Drawing.Size(88, 36);
-            this.LogoutButton.TabIndex = 8;
-            this.LogoutButton.Text = "Logout";
-            this.LogoutButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.LogoutButton.UseVisualStyleBackColor = true;
-            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // MainForm
             // 

@@ -144,6 +144,8 @@
             // 
             // LoginForm
             // 
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -166,8 +168,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox usernameBoxLogin;
-        private System.Windows.Forms.TextBox passwordBoxLogin;
+        public System.Windows.Forms.TextBox usernameBoxLogin;
+        public System.Windows.Forms.TextBox passwordBoxLogin;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label usernameLoginLabel;
         private System.Windows.Forms.Label passwordLoginLabel;

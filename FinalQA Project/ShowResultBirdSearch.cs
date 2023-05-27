@@ -19,9 +19,10 @@ namespace FinalQA_Project
         public string SelectedSerialNumber { get; private set; }
         public event EventHandler<string> SerialNumberSelected;
         int ClickedRow;
-        String EditRowSN;
+        string EditRowSN;
         bool GenderSearch;
         int cageSearch = -1;
+
         public ShowResultBirdSearch(int cagesearch)
         {
             InitializeComponent();
@@ -92,6 +93,7 @@ namespace FinalQA_Project
                 }
 
                 dataGridView2.Sort(dataGridView2.Columns["SerialNumber"], ListSortDirection.Ascending);
+                dataGridView2.AllowUserToAddRows = false; // Disable the last empty row
             }
             else if (cageSearch == 1)
             {
@@ -101,50 +103,55 @@ namespace FinalQA_Project
         }
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow clickedRow = dataGridView2.Rows[e.RowIndex];
-            object[] rowData = clickedRow.Cells.Cast<DataGridViewCell>()
-
-                                    .Select(cell => cell.Value)
-                                    .ToArray();
-            if (!GenderSearch)
+            if (e.RowIndex >= 0)
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView2.Columns.Count - 2)
-                {                  
-                    EditRowSN = rowData[0].ToString();
-                    ClickedRow = e.RowIndex;
+                DataGridViewRow clickedRow = dataGridView2.Rows[e.RowIndex];
+                object[] rowData = clickedRow.Cells.Cast<DataGridViewCell>()
 
-                    // Open the EditBirdForm and pass the row data
-                    EditBirdForm editForm = new EditBirdForm(rowData, this);
-                    editForm.FormClosed += EditForm_FormClosed;
-                    editForm.ShowDialog();
+                                        .Select(cell => cell.Value)
+                                        .ToArray();
+                if (!GenderSearch)
+                {
+                    if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView2.Columns.Count - 2 && dataGridView2.Columns["Edit"] != null)
+                    {
+                        EditRowSN = rowData[0].ToString();
+                        ClickedRow = e.RowIndex;
+
+                        // Open the EditBirdForm and pass the row data
+                        EditBirdForm editForm = new EditBirdForm(rowData, this);
+                        editForm.FormClosed += EditForm_FormClosed;
+                        editForm.ShowDialog();
+                    }
+                    else if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView2.Columns.Count - 1 && dataGridView2.Columns["AddChick"] != null)
+                    {
+                        AddChickForm chickForm = new AddChickForm(rowData);
+                        chickForm.ShowDialog();
+                    }
                 }
-                else if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView2.Columns.Count - 1)
-                {                   
-                    AddChickForm chickForm = new AddChickForm(rowData);
-                    chickForm.Show();
+                else
+                {
+                    if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView2.Columns["Select"].Index)
+                    {
+
+                        clickedRow = dataGridView2.Rows[e.RowIndex];
+                        string serialNumber = clickedRow.Cells["SerialNumber"].Value.ToString();
+                        SelectedSerialNumber = serialNumber;
+                        SerialNumberSelected?.Invoke(this, SelectedSerialNumber);
+                        Close();
+
+                    }
                 }
             }
-            else
-            {
-                if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView2.Columns["Select"].Index)
-                {
-                    
-                    clickedRow = dataGridView2.Rows[e.RowIndex];
-                    string serialNumber = clickedRow.Cells["SerialNumber"].Value.ToString();                  
-                    SelectedSerialNumber = serialNumber;
-                    SerialNumberSelected?.Invoke(this, SelectedSerialNumber);                  
-                    Close();
 
-                }
-            }            
-        }        
+        }
+            
         private void EditForm_FormClosed(object sender, FormClosedEventArgs e)
        {
             // Create a new Excel Application object
             Application excelApp = new Application();
 
             // Open the Excel workbook containing the login information
-            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
             //
             // Get the Worksheet object for the sheet containing the login information
             Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];

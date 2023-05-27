@@ -18,12 +18,14 @@ namespace FinalQA_Project
 {
     public partial class AddCageForm : MaterialForm
     {
+        public bool IsMsg;
         public AddCageForm()
         {
             InitializeComponent();
         }
 
-        private void AddCageButton_Click(object sender, EventArgs e)
+        public Range serialNumberRange;
+        public void AddCageButton_Click(object sender, EventArgs e)
         {
             // Capture the data entered by the user
             string cageSerialNumber = SerialNumberTextBox.Text;
@@ -44,17 +46,18 @@ namespace FinalQA_Project
                 Application excelApp = new Application();
 
                 // Open the Excel workbook containing the login information
-                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+                Workbook workbook = excelApp.Workbooks.Open(@"\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
 
                 // Get the Worksheet object for the sheet containing the login information
                 Worksheet worksheet = (Worksheet)workbook.Worksheets["Cages"];
 
 
                 // Check if the cage serial number already exists in the worksheet
-                Range serialNumberRange = worksheet.Range["A:A"].Find(cageSerialNumber, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
+                serialNumberRange = worksheet.Range["A:A"].Find(cageSerialNumber, Missing.Value, XlFindLookIn.xlValues, XlLookAt.xlWhole, XlSearchOrder.xlByRows, XlSearchDirection.xlNext, false, Missing.Value, Missing.Value);
                 if (serialNumberRange != null)
                 {
                     MessageBox.Show("Error!\nCage Serial number already exists.", "Duplicate cage serial number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ClosingAll(excelApp, workbook, worksheet);
                     return;
                 }
 
@@ -66,15 +69,9 @@ namespace FinalQA_Project
                 worksheet.Cells[lastRow, 3] = cageWidth;
                 worksheet.Cells[lastRow, 4] = cageHight;
                 worksheet.Cells[lastRow, 5] = cageMaterial;
-  
 
-                // Close the workbook and the Excel application
-                workbook.Save();
-                workbook.Close();
-                excelApp.Quit();
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
+
+                ClosingAll(excelApp, workbook, worksheet);
 
 
                 MessageBox.Show("New cage added.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -86,6 +83,18 @@ namespace FinalQA_Project
             }
         }
 
+        private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
+        {
+            // Close the workbook and the Excel application
+            workbook.Save();
+            workbook.Close();
+            excelApp.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
+
+        }
+            
 
 
         private bool ValidateInputAddCage(string cageSerialNumber, int cageLength, int cageWidth, int cageHight, string cageMaterial)
@@ -100,7 +109,7 @@ namespace FinalQA_Project
             // Check if the cageSerialNumber is a valid string (letters and numbers)
             if (!AddBirdForm.IsAlphabeticAndNumeric(cageSerialNumber))
             {
-                MessageBox.Show("Please enter valid cage serial number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid cage serial number (letters and numbers only).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -114,6 +123,13 @@ namespace FinalQA_Project
             if (cageLength==0 || cageWidth==0 || cageHight==0)
             {
                 MessageBox.Show("Please enter valid cage size (positive integer).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                IsMsg = true;
+                return false;
+            }
+            if (cageLength >= 100 || cageWidth >= 100 || cageHight >= 100)
+            {
+                MessageBox.Show("Please enter valid cage size (between 1 and 100).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                IsMsg = true;
                 return false;
             }
 
@@ -143,7 +159,6 @@ namespace FinalQA_Project
 
         private void CloseExcelProcesses()
         {
-            MessageBox.Show("Are you sure you want to exit?");
             // Get all running Excel processes
             Process[] processes = Process.GetProcessesByName("EXCEL");
 

@@ -172,8 +172,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox usernameBoxSignUp;
-        private System.Windows.Forms.TextBox passwordBoxSignUp;
+        public System.Windows.Forms.TextBox usernameBoxSignUp;
+        public System.Windows.Forms.TextBox passwordBoxSignUp;
         private System.Windows.Forms.TextBox idBoxSignUp;
         private System.Windows.Forms.Label usernameSignUpLabel;
         private System.Windows.Forms.Label passwordSignUpLabel;

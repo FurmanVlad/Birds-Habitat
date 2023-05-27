@@ -68,7 +68,7 @@ namespace FinalQA_Project
             Application excelApp = new Application();
 
             // Open the Excel workbook containing the login information
-            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
             //
             // Get the Worksheet object for the sheet containing the login information
             Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
@@ -515,7 +515,7 @@ namespace FinalQA_Project
             Application excelApp = new Application();
 
             // Open the Excel workbook containing the login information
-            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+            Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
             //
             // Get the Worksheet object for the sheet containing the login information
             Worksheet worksheet = (Worksheet)workbook.Worksheets["Birds"];
@@ -573,12 +573,11 @@ namespace FinalQA_Project
 
             try
             {
-                Console.WriteLine("wtf");
                 // Create a new Excel Application object
                 Application excelApp = new Application();
 
                 // Open the Excel workbook containing the habitat information
-                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
 
                 // Get the Worksheet object for the sheet containing the habitat information
                 Worksheet worksheetBird = (Worksheet)workbook.Worksheets["Birds"];
@@ -659,7 +658,7 @@ namespace FinalQA_Project
             // Check if the serial number is a valid integer
             if (!IsNumeric(serialNumber))
             {
-                MessageBox.Show("Please enter valid serial number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid serial number (numbers only).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             /////////////////// species ///////////////////
@@ -701,7 +700,7 @@ namespace FinalQA_Project
             // Check if the cageSerialNumber is a valid string (letters and numbers)
             if (!IsAlphabeticAndNumeric(cageSerialNumber))
             {
-                MessageBox.Show("Please enter valid cage serial number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid cage serial number (letters and numbers only).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -715,7 +714,7 @@ namespace FinalQA_Project
             // Check if the serial number is a valid integer
             if (!IsNumeric(fatherSerialNumber))
             {
-                MessageBox.Show("Please enter valid father's serial number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid father's serial number (numbers only).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -729,7 +728,7 @@ namespace FinalQA_Project
             // Check if the serial number is a valid integer
             if (!IsNumeric(motherSerialNumber))
             {
-                MessageBox.Show("Please enter valid mother's serial number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid mother's serial number (numbers only).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 

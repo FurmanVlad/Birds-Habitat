@@ -23,7 +23,7 @@ namespace FinalQA_Project
         {
             InitializeComponent();
             materialLabel1.Visible = false;
-            materialLabel2.Visible = false;
+            SerialNumberSearchCageLabel.Visible = false;
             SerialNumberTextBox.Visible = false;
             MaterialComboBox.Visible = false;
 
@@ -33,12 +33,12 @@ namespace FinalQA_Project
 
             string selectedOption = SearchCageComboBox.SelectedItem.ToString();
             materialLabel1.Visible = false;
-            materialLabel2.Visible = false;
+            SerialNumberSearchCageLabel.Visible = false;
             SerialNumberTextBox.Visible = false;
             MaterialComboBox.Visible = false;
             if(selectedOption == "Serial Search")
             {
-                materialLabel2.Visible = true;
+                SerialNumberSearchCageLabel.Visible = true;
                 SerialNumberTextBox.Visible = true;
             }
             else if (selectedOption == "Material Search")
@@ -48,7 +48,7 @@ namespace FinalQA_Project
             }
 
         }
-        private void Search_Click(object sender, EventArgs e)
+        private void SearchCagebutton_Click(object sender, EventArgs e)
         {
             
             try
@@ -57,7 +57,7 @@ namespace FinalQA_Project
                 Application excelApp = new Application();
 
                 // Open the Excel workbook containing the login information
-                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\gaiso\OneDrive\Desktop\Birds_Habitat-master\Birds_Habitat-master\FinalQA Project\Birds habitat.xlsx");
+                Workbook workbook = excelApp.Workbooks.Open(@"C:\Users\vladi\source\repos\FinalQA Project\FinalQA Project\Birds habitat.xlsx");
                 //
                 // Get the Worksheet object for the sheet containing the login information
                 Worksheet worksheet = (Worksheet)workbook.Worksheets["Cages"];
@@ -100,7 +100,7 @@ namespace FinalQA_Project
                         {
                             ShowResultCageSearch resultForm = new ShowResultCageSearch();
                             resultForm.AddRowToDataGridView(rowData);
-                            resultForm.Show();
+                            resultForm.ShowDialog();
 
                         }
                         else
@@ -177,7 +177,7 @@ namespace FinalQA_Project
                 return;
             }
 
-            resultForm.Show();
+            resultForm.ShowDialog();
         }
         public void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
         {
@@ -194,7 +194,6 @@ namespace FinalQA_Project
 
         private void CloseExcelProcesses()
         {
-            MessageBox.Show("Are you sure you want to exit?");
             // Get all running Excel processes
             Process[] processes = Process.GetProcessesByName("EXCEL");
 
@@ -205,6 +204,8 @@ namespace FinalQA_Project
                 process.Close();
             }
         }
+
+        
         //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.YourForm_FormClosing);
         //using System.Diagnostics;
 
