@@ -152,7 +152,7 @@ namespace FinalQA_Project
                 worksheet.Cells[rowNumber, 11].Value = BodyColorComboBox.Text;
                 
 
-                workbook.Save();
+                
                 ClosingAll(excelApp, workbook, worksheet);
                 MessageBox.Show("Bird has been updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -166,6 +166,7 @@ namespace FinalQA_Project
         
         private void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
         {
+            workbook.Save();
             workbook.Close();
             excelApp.Quit();
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);

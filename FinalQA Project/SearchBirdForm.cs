@@ -151,14 +151,14 @@ namespace FinalQA_Project
                     ClosingAll(excelApp, workbook, worksheet);
                     return;
                 }
-                SearchBirdFromSheet(worksheet, selectedGender, "E:E");
+                SearchBirdFromSheet(excelApp, workbook, worksheet, selectedGender, "E:E");
 
             }
             if (selectedOption == "Hatch Date")
             {
 
                 string selectedDate = dateTimePickerSearchBird.Text;
-                SearchBirdFromSheet(worksheet, selectedDate, "D:D");
+                SearchBirdFromSheet(excelApp, workbook, worksheet, selectedDate, "D:D");
 
 
             }
@@ -173,20 +173,21 @@ namespace FinalQA_Project
                     return;
                 }
 
-                SearchBirdFromSheet(worksheet, selectedSpecies, "B:B");
+                SearchBirdFromSheet(excelApp, workbook,worksheet, selectedSpecies, "B:B");
             }
 
-            ClosingAll(excelApp, workbook, worksheet);          
+            //ClosingAll(excelApp, workbook, worksheet);          
         }
-        public void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet )
+        public void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
         {
             workbook.Close();
             excelApp.Quit();
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
+
         }
-        public void SearchBirdFromSheet(Worksheet worksheet, string comboBoxPick,string col) {
+        public void SearchBirdFromSheet(Application excelApp, Workbook workbook, Worksheet worksheet, string comboBoxPick,string col) {
             resultForm = new ShowResultBirdSearch();
 
             Range range = worksheet.Range[col]; 
@@ -225,8 +226,9 @@ namespace FinalQA_Project
                 MessageBox.Show("No birds found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-           
-            resultForm.ShowDialog();           
+            ClosingAll(excelApp, workbook, worksheet);
+            resultForm.ShowDialog();        
+            
         }
         private void SearchBirdForm_FormClosing(object sender, FormClosingEventArgs e)
         {

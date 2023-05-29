@@ -147,6 +147,7 @@ namespace FinalQA_Project
             
         private void EditForm_FormClosed(object sender, FormClosedEventArgs e)
        {
+            Console.WriteLine("WWWWWTTTTTTFFFF");
             // Create a new Excel Application object
             Application excelApp = new Application();
 
@@ -163,6 +164,7 @@ namespace FinalQA_Project
                 Range cell = worksheet.Cells[serialNumberRange.Row, i];
                 dataGridView2.Rows[ClickedRow].Cells[i-1].Value = cell.Value;
             }
+            workbook.Save();
             workbook.Close();
             excelApp.Quit();
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
