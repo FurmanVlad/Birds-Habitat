@@ -47,7 +47,7 @@
             // 
             // MainFormPanel
             // 
-            this.MainFormPanel.BackColor = System.Drawing.Color.DimGray;
+            this.MainFormPanel.BackColor = System.Drawing.Color.DarkCyan;
             this.MainFormPanel.Controls.Add(this.LogoutButton);
             this.MainFormPanel.Controls.Add(this.SearchCageMainFormLabel);
             this.MainFormPanel.Controls.Add(this.AddCageMainFormLabel);
