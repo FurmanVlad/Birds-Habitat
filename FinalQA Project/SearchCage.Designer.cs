@@ -96,7 +96,7 @@
             this.SerialNumberSearchCageLabel.BackColor = System.Drawing.Color.Transparent;
             this.SerialNumberSearchCageLabel.Depth = 0;
             this.SerialNumberSearchCageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
-            this.SerialNumberSearchCageLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.SerialNumberSearchCageLabel.ForeColor = System.Drawing.Color.White;
             this.SerialNumberSearchCageLabel.Location = new System.Drawing.Point(366, 69);
             this.SerialNumberSearchCageLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.SerialNumberSearchCageLabel.Name = "SerialNumberSearchCageLabel";
@@ -136,7 +136,7 @@
             this.materialLabel1.BackColor = System.Drawing.Color.Transparent;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
-            this.materialLabel1.ForeColor = System.Drawing.SystemColors.Window;
+            this.materialLabel1.ForeColor = System.Drawing.Color.White;
             this.materialLabel1.Location = new System.Drawing.Point(366, 69);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";

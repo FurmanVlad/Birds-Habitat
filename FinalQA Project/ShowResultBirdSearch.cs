@@ -147,7 +147,6 @@ namespace FinalQA_Project
             
         private void EditForm_FormClosed(object sender, FormClosedEventArgs e)
        {
-            Console.WriteLine("WWWWWTTTTTTFFFF");
             // Create a new Excel Application object
             Application excelApp = new Application();
 

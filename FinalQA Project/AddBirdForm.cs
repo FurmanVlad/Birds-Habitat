@@ -141,9 +141,10 @@ namespace FinalQA_Project
 
 
                 // Close the workbook and the Excel application
-                ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
+                
                 MessageBox.Show("New bird added.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+                ClosingAll(excelApp, workbook, worksheetBird, worksheetCage);
             }
             catch (Exception ex)
             {

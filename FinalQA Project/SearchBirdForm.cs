@@ -176,7 +176,6 @@ namespace FinalQA_Project
                 SearchBirdFromSheet(excelApp, workbook,worksheet, selectedSpecies, "B:B");
             }
 
-            //ClosingAll(excelApp, workbook, worksheet);          
         }
         public void ClosingAll(Application excelApp, Workbook workbook, Worksheet worksheet)
         {
@@ -224,6 +223,7 @@ namespace FinalQA_Project
             else
             {
                 MessageBox.Show("No birds found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ClosingAll(excelApp, workbook, worksheet);
                 return;
             }
             ClosingAll(excelApp, workbook, worksheet);

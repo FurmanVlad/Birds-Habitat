@@ -105,7 +105,7 @@ namespace FinalQA_Project
 
                 // Display a message indicating that the registration was successful
                 MessageBox.Show("Registration successful!");
-                ClosingAll(excelApp, workbook, worksheet);
+                //ClosingAll(excelApp, workbook, worksheet);
                 // Close the registration form
                 this.Close();
             }
