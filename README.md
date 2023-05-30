@@ -50,22 +50,37 @@ This project is a bird management system with features such as user registration
    - Click the "Edit" button to save the changes.
    - The application will validate the input data and display error messages if any fields are missing or contain invalid information.
 10. To add a chick to bird:
-   - Select a bird from the search results.
-   - Click the "Add chick" button.
-   - Enter the bird's information in the provided fields.
-   - Click the "Add chick" button to save the changes.
-   - The application will validate the input data and display error messages if any fields are missing or contain invalid information.
+    - Select a bird from the search results.
+    - Click the "Add chick" button.
+    - Enter the bird's information in the provided fields.
+    - Click the "Add chick" button to save the changes.
+    - The application will validate the input data and display error messages if any fields are missing or contain invalid information.
 11. To view a list of bird in a cage:
-   - Select a cage from the search results.
-   - Click the "View" button.
-   - The application will display the list of birds that in this specific cage.
+    - Select a cage from the search results.
+    - Click the "View" button.
+    - The application will display the list of birds that in this specific cage.
 12. To log out of the application, click the "Logout" button and confirm the logout when prompted.
 13. You can exit the application by closing the window or clicking the close button. A confirmation dialog will appear to confirm the exit.
 
 ### Dependencies
 - .NET Framework
 - Microsoft.Office.Interop.Excel
+- You must change the paths in the following documents in the project where your Excel documents are stored:
+    - **"C: ... Your PATH ... \Birds habitat.xlsx":**
+    - AddBirdForm.cs (line 101) - 
+    - AddCageForm.cs (line 49)
+    - AddChickForm.cs (line 71)
+    - EditBirdForm.cs (line 118)
+    - SearchBirdForm.cs (line 92)
+    - SearchCage.cs (line 60)
+    - ShowResultBirdSearch.cs (line 154)
+    - ShowResultCageSearch.cs (line 60)
+    - **"C: ... Your PATH ... \Users.xlsx":**
+    - LoginForm.cs (line 49)
+    - SignUpForm.cs (line 76)
 
 ### Authors
-![developers](https://img.shields.io/badge/Developed%20By%3A-Furman%20Vlad,%20Shukrum%20Gai,%20Berko%20Tal,%20Hazan%20Ori-red)
-
+- Vlad Furman
+- Guy Shukrun
+- Tal Berko
+- Ori Hazan
