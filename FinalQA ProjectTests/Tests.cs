@@ -147,7 +147,7 @@ namespace FinalQA_Project.Tests
 
             // Set invalid username and valid password
             signUpForm.usernameBoxSignUp.Text = "aaa";
-            signUpForm.passwordBoxSignUp.Text = "a";
+            signUpForm.passwordBoxSignUp.Text = "aaaaaa2!";
 
             // Act
             signUpForm.signUpButton_Click(null, null);
