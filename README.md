@@ -65,6 +65,19 @@ This project is a bird management system with features such as user registration
 ### Dependencies
 - .NET Framework
 - Microsoft.Office.Interop.Excel
+- You must change the paths in the following documents in the project where your Excel documents are stored:
+    - **"C: ... Your PATH ... \Birds habitat.xlsx":**
+    - AddBirdForm.cs (line 101) - 
+    - AddCageForm.cs (line 49)
+    - AddChickForm.cs (line 71)
+    - EditBirdForm.cs (line 118)
+    - SearchBirdForm.cs (line 92)
+    - SearchCage.cs (line 60)
+    - ShowResultBirdSearch.cs (line 154)
+    - ShowResultCageSearch.cs (line 60)
+    - **"C: ... Your PATH ... \Users.xlsx":**
+    - LoginForm.cs (line 49)
+    - SignUpForm.cs (line 76)
 
 ### Authors
 ![developers](https://img.shields.io/badge/Developed%20By%3A-Furman%20Vlad,%20Shukrum%20Gai,%20Berko%20Tal,%20Hazan%20Ori-red)
